@@ -3,12 +3,12 @@ import typeorm from 'typeorm';
 const Movie = new typeorm.EntitySchema({
   name: 'Movie',
   columns: {
-    titre: {
+    title: {
       primary: true,
       type: String,
       unique: true,
     },
-    date_de_sortie: {
+    date: {
       type: String,
       unique: false,
     },

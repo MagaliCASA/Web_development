@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "dotenv -- nodemon --experimental-modules ./server.js",
+    "debug": "dotenv -- nodemon --inspect --experimental-modules ./server.js",
     "start": "dotenv -- node --experimental-modules ./server.js",
     "lint": "eslint . --fix",
     "migration:generate": "dotenv -- typeorm --dataSource='./datasource.js' migration:generate --outputJs --pretty migrations/$npm_config_name",
     "postmigration:generate": "./postmigration.sh",
     "migration:run": "dotenv -- typeorm --dataSource='./datasource.js' migration:run",
-    "migration:revert": "dotenv -- typeorm --dataSource='./datasource.js' migration:revert"
-  },
+    "migration:revert": "dotenv -- typeorm --dataSource='./datasource.js' migration:revert",
+    "vercel-build": "npm run migration:run"
+    },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv-cli": "^7.4.1",
