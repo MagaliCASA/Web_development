@@ -1,44 +1,45 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import './Movie.css';
+
+// function Movie(props) { /*ou props puis props.movie dans le <li>*/
+
+// // const [data, setdata] = useState([]);
+
+// //   axios
+// //     .get(`https://image.tmdb.org/t/p/original${props.movie.poster_path}`)
+// //     .then((response) => {
+// //       setdata(response);
+// //     })
+// //     .catch((error) => {
+// //       // Do something if call failed
+// //       console.log(error)
+// //     });
+
+// //     console.log(data)
+
+//   return (
+//     <div>
+//     <li>{props.movie.original_title} : {props.movie.release_date} : {props.movie.image}</li>
+//     </div>
+//   );
+// }
+
+// export default Movie;
+
+import React from 'react';
 import './Movie.css';
 
-const useData = () => {
-  const [movie, date, setmovie, setdate] = useState([])
-
-  useEffect(() => {
-    axios
-      .get(`https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`)
-      .then((response) => {
-        // Do something if call succeeded
-        const movieTitle = response.data.results.map(movie => movie.original_title);
-        const date_sortie = response.data.results.map(movie => movie.release_date);
-
-        // Mettre à jour l'état de 'movies' avec la liste des titres originaux
-        setmovie(movieTitle);
-        setdate(date_sortie);
-      })
-      .catch((error) => {
-        // Do something if call failed
-        console.log(error)
-      });
-  }, []);
-
-  return { movie, date };
-};
-
-function Movie() {
-  const { movies, date } = useData();
-
+function Movie(props) {
   return (
     <div>
-      <ul>
-        {movies.map((movie) =>
-          <li>{movie.original_title} "sorti le" {movie.original_title}</li>
-        )}
-      </ul>
+      <p>
+        <h3>{props.movie.original_title}</h3>
+        <p>Date de sortie : {props.movie.release_date}</p>
+        {props.movie.image && <img src={props.movie.image} alt={props.movie.original_title} className='movie-item' />}
+      </p>
     </div>
   );
-
-};
+}
 
 export default Movie;

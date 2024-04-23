@@ -1,61 +1,49 @@
+import { useEffect, useState } from 'react';
 import logo from './logo.svg';
+import malacy from './malacy.png'
 import './Home.css';
-import React, { useEffect, useState } from 'react';
 import Movie from '../../components/Movie/Movie.jsx'
 import axios from 'axios';
 
-const useFetchMovies = () => {
-  const [movies, setmovies] = useState([])
+function Home() {
+  const [movies, setMovies] = useState([]);
+  const [movieName, setMovieName] = useState("");
+
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/popular?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb`)
+      .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
       .then((response) => {
-        setmovies(movies.concat(response.data.results));
+        const popularMovies = response.data.results;
+        // Pour chaque film, récupérer l'image
+        Promise.all(popularMovies.map(movie =>
+          axios.get(`https://image.tmdb.org/t/p/original${movie.poster_path}`)
+        )).then(responses => {
+          // Pour chaque réponse, ajouter l'image au film correspondant
+          const moviesWithImages = popularMovies.map((movie, index) => ({
+            ...movie,
+            image: responses[index].config.url
+          }));
+          // Mettre à jour l'état des films avec les images
+          setMovies(moviesWithImages);
+        });
       })
       .catch((error) => {
-        // Do something if call failed
-        console.log(error)
+        console.log(error);
       });
   }, []);
-  return { movies, setmovies };
-};
 
-function Home() {
-  const [movieName, setmovieName] = useState("");
-  const { movies, setmovies } = useFetchMovies();
-
-  console.log(movies);
   return (
     <div className="App">
       <header className="App-header">
-        <label>
-          Recherche de films :
-          <input type="text" Name="film" value={movieName} onChange={(event) =>
-            setmovieName(event.target.value)} />
+        <label htmlFor="textInput">Rechercher un film : 
+          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
         </label>
-        <input type="submit" value="Submit" />
-
-        <h3>Résultats de la recherche</h3>
-        <p>
-          {movieName}
-        </p>
-
-        <div>
-          <h2>Liste de films populaires :</h2>
-          <ul>
-            {movies.map((movie) => <Movie />
-            )}
-          </ul>
-        </div>
-
+        <p>{movieName}</p>
+        <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
-        <p>
-          1. Insaisissables
-        </p>
-        <p>
-          2. Indiana Jones
-        </p>
-        <img src={logo} className="App-logo" alt="logo" />
+        <ul class="movies-container">
+          {movies.map((movie, index) => <Movie key={index} movie={movie}/>)}
+        </ul>
         <a
           className="App-link"
           href="https://reactjs.org"

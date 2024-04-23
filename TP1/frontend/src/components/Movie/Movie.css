@@ -1,3 +1,9 @@
 .users-loading-error {
   color: red;
 }
+
+.movie-item{
+  width: 400px;
+  height: 600px;
+  margin-top: 5px;
+}
