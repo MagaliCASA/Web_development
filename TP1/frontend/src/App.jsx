@@ -5,6 +5,7 @@ import './App.css';
 import { Root } from './components/Root/Root';
 import Counter from './pages/Counter/Counter';
 import Users from './pages/Users/Users';
+import Movie_detail from './pages/Movie_detail/About';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Route path="counter" element={<Counter />} />
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
-        <Route path="about" element={<Movie_detail />} />
+        <Route path="Movie_detail" element={<Movie_detail />} />
       </Routes>
     </Root>
   );
