@@ -9,6 +9,16 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [movieName, setMovieName] = useState("");
 
+  const [page,setPage] = useState(1);
+  const next_page = (event) =>{
+    if(page!=10)
+    {setPage(page+1);}
+  }
+  const prev_page = (event) =>{
+    if (page!=1)
+    {setPage(page-1);}
+  }
+
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
@@ -41,9 +51,19 @@ function Home() {
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
+        <p>        
+        <button onClick={prev_page}>
+        prev</button> {page} <button onClick={next_page}>
+        next</button>
+        </p>
         <ul class="movies-container">
           {movies.map((movie, index) => <Movie key={index} movie={movie}/>)}
         </ul>
+        <p>        
+        <button onClick={prev_page}>
+        prev</button> {page} <button onClick={next_page}>
+        next</button>
+        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
