@@ -15,7 +15,7 @@ function App() {
         <Route path="counter" element={<Counter />} />
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
-        <Route path="Movie_detail" element={<Movie_detail />} />
+        <Route path="movie_detail" element={<Movie_detail />} />
       </Routes>
     </Root>
   );
