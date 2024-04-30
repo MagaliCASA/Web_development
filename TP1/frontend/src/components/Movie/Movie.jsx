@@ -36,7 +36,9 @@ function Movie(props) {
       <p>
         <h3>{props.movie.original_title}</h3>
         <p>Date de sortie : {props.movie.release_date}</p>
+        <a href="https://google.com"> 
         {props.movie.image && <img src={props.movie.image} alt={props.movie.original_title} className='movie-item' />}
+        </a>
       </p>
     </div>
   );
