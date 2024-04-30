@@ -19,6 +19,7 @@ const Header = () => {
       <Link className="Link" to="/about">
         About
       </Link>
+      <div>|</div>
       <Link className="Link" to="/movie_detail">
         Movie_detail
       </Link>
