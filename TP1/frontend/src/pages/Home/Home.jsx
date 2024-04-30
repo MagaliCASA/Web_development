@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import malacy from './malacyv2.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
+import MoviesTable from '../../components/MoviesTable/MoviesTable';
 import axios from 'axios';
 
 function Home() {
@@ -55,15 +56,20 @@ function Home() {
         <button onClick={prev_page}>
         prev</button> {page} <button onClick={next_page}>
         next</button>
-        </p>
-        <ul class="movies-container">
-          {movies.map((movie, index) => <Movie key={index} movie={movie}/>)}
-        </ul>
+        </p> 
+              
+          <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
+        
         <p>        
         <button onClick={prev_page}>
         prev</button> {page} <button onClick={next_page}>
         next</button>
         </p>
+        <ul class="movies-container">
+          {
+          //movies.map((movie, index) => <Movie key={index} movie={movie}/>)
+          }
+        </ul>
         <a
           className="App-link"
           href="https://reactjs.org"
