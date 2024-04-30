@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import malacy from './malacy.png'
+import malacy from './malacyv2.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import axios from 'axios';
