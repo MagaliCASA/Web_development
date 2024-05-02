@@ -10,14 +10,12 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [movieName, setMovieName] = useState("");
 
-  const [page,setPage] = useState(1);
-  const next_page = (event) =>{
-    if(page!=10)
-    {setPage(page+1);}
+  const [page, setPage] = useState(1);
+  const next_page = (event) => {
+    if (page != 10) { setPage(page + 1); }
   }
-  const prev_page = (event) =>{
-    if (page!=1)
-    {setPage(page-1);}
+  const prev_page = (event) => {
+    if (page != 1) { setPage(page - 1); }
   }
 
   useEffect(() => {
@@ -46,28 +44,26 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <label htmlFor="textInput">Rechercher un film : 
+        <label htmlFor="textInput">Rechercher un film :
           <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
         </label>
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
-        <p>        
-        <button onClick={prev_page}>
-        prev</button> {page} <button onClick={next_page}>
-        next</button>
-        </p> 
-              
-          <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
-        
-        <p>        
-        <button onClick={prev_page}>
-        prev</button> {page} <button onClick={next_page}>
-        next</button>
+        <p>
+          <button onClick={prev_page}>
+            prev</button> {page} <button onClick={next_page}>
+            next</button>
+        </p>
+        <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
+        <p>
+          <button onClick={prev_page}>
+            prev</button> {page} <button onClick={next_page}>
+            next</button>
         </p>
         <ul class="movies-container">
           {
-          //movies.map((movie, index) => <Movie key={index} movie={movie}/>)
+            //movies.map((movie, index) => <Movie key={index} movie={movie}/>)
           }
         </ul>
         <a
