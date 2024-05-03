@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'; // Suppose que vous utilisez axios pour faire des appels API
 import '../../components/Movie/Movie.css';
 
+
 function MovieDetail() {
   const { movieId } = useParams(); // Extrait l'identifiant du film de l'URL
   const [movie, setMovie] = useState(null);

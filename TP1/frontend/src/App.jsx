@@ -5,7 +5,7 @@ import './App.css';
 import { Root } from './components/Root/Root';
 import Counter from './pages/Counter/Counter';
 import Users from './pages/Users/Users';
-import MovieDetail from './pages/MovieDetail/MovieDetail';;
+import MovieDetail from './pages/MovieDetail/MovieDetail';
 
 function App() {
   return (
