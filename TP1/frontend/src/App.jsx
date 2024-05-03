@@ -15,9 +15,7 @@ function App() {
         <Route path="counter" element={<Counter />} />
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
-        {/* Configurez une route dynamique pour Movie_detail */}
-        <Route path="movie_detail/:movieId" element={<MovieDetail />} />
-        {/* <Route path="movie_detail" element={<Movie_detail />} /> */}
+        <Route path="movie_detail/:movieId/:movieId2" element={<MovieDetail />} />
       </Routes>
     </Root>
   );

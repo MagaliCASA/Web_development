@@ -46,12 +46,11 @@ function Movie(props) {
         <h3>{props.movie.original_title}</h3>
         <p>Date de sortie : {props.movie.release_date}</p>
         {/* Utilisez Link pour créer un lien vers les détails du film avec les données du film en tant que paramètres d'URL */}
-        <Link to={{ pathname: `movie_detail/${slugify(props.movie.original_title)}`, state: { movie: props.movie } }}>
+        <Link to={{ pathname: `movie_detail/${props.movie.id}/${slugify(props.movie.original_title)}`, state: { movie: props.movie } }}>
           {props.movie.image && <img src={props.movie.image} alt={props.movie.original_title} className='movie-item' />}
-          {/* <MovieDetail key={index} movie={movie} /> */}
         </Link>
       </p>
-    </div>
+    </div >
   );
 }
 
