@@ -8,12 +8,14 @@ function MovieDetail() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(null); // Stocke l'URL de l'image d'arrière-plan
 
   useEffect(() => {
     // Faites un appel API pour récupérer les détails du film en fonction de movieId
     axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=57359ff087905e870d40ba4880a1dce0`)
       .then(response => {
         setMovie(response.data); // Met à jour l'état avec les données du film
+        setBackgroundImage(`https://image.tmdb.org/t/p/original${response.data.backdrop_path}`); // Met à jour l'URL de l'image d'arrière-plan
         setLoading(false); // Met à jour l'état de chargement
       })
       .catch(error => {
@@ -35,19 +37,22 @@ function MovieDetail() {
 
   // Affichez les détails du film une fois qu'ils sont disponibles
   return (
-    <div>
-      <h2>{movie.title}</h2>
-      <p>Titre du film : {movie.title}</p>
-      <p>Date de sortie : {movie.release_date}</p>
-      <p>Popularité : {movie.popularity}</p>
-      <p>Vote moyen : {movie.vote_average}</p>
-      <p>Nombre de votes : {movie.vote_count}</p>
-      <p>Adulte : {movie.adult ? 'Oui' : 'Non'}</p>
-      <p>Langue originale : {movie.original_language}</p>
-      <p>Synopsis : {movie.overview}</p>
-      <p>Image d'arrière-plan : <img src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`} alt={movie.title} /></p>
-      <p>Affiche : <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} /></p>
-      {/* Ajoutez d'autres détails du film ici */}
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '800px', padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+        <h1 style={{ fontSize: '2em', textAlign: 'center', color: 'black' }}>{movie.title}</h1>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} style={{ width: '200px', marginRight: '20px' }} />
+          <div>
+            <p style={{ color: 'black' }}><strong><u>Date de sortie :</u></strong> {movie.release_date}</p>
+            <p style={{ color: 'black' }}><strong><u>Langue originale :</u></strong> {movie.original_language}</p>
+            <p style={{ color: 'black' }}><strong><u>Synopsis :</u></strong> {movie.overview}</p>
+            <p style={{ color: 'black' }}><strong><u>Popularité :</u></strong> {movie.popularity}</p>
+            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie.vote_average}</p>
+            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie.vote_count}</p>
+            <p style={{ color: 'black' }}><strong><u>Adulte :</u></strong> {movie.adult ? 'Oui' : 'Non'}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
