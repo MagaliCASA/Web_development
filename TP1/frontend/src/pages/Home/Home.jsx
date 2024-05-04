@@ -45,8 +45,6 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-      <div className="bulles"> <img src={poisson} className="image-align-left" alt="Poisson qui flotte" /> </div>
-      <div className="bulles"> <img src={poisson} className="image-align-right" alt="Poisson qui flotte" /> </div>
         <label htmlFor="textInput">Rechercher un film :
           <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
         </label>
@@ -59,7 +57,9 @@ function Home() {
             prev</button> {page} <button onClick={next_page}>
             next</button>
         </p>
+
         <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
+
         <p>
           <button onClick={prev_page}>
             prev</button> {page} <button onClick={next_page}>

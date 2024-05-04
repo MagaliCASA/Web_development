@@ -29,7 +29,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 1;
   width: 100%;
   height: 100%;
   background-image: linear-gradient(45deg, #afe8f4, #4c93b9, #191f8d);
@@ -81,9 +81,11 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
   background-image: url('./PetitPoisson.png');
   background-size: contain;
   animation: monteDescend 5s ease-in-out infinite; /* Ajustez la durée de l'animation selon vos préférences */
+  clear : both;
 }
 
 .image-align-left {
@@ -99,5 +101,3 @@
   width: 20%;
   height: 20%;
 }
-
-
