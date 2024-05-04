@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import malacy from './malacyv2.png'
+import malacy from './PetitPoisson.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import MoviesTable from '../../components/MoviesTable/MoviesTable';
 import axios from 'axios';
+
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -71,9 +71,7 @@ function Home() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          ></a>
       </header>
     </div>
   );
