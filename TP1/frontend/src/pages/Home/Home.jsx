@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import malacy from './PetitPoisson.png'
 import poisson from './2560px-Common_goldfish_silhouette.svg.png'
+import poisson2 from './PoissonGauche.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import MoviesTable from '../../components/MoviesTable/MoviesTable';
@@ -45,7 +46,7 @@ function Home() {
   return (
     <div className="App">
       <div className="container">
-        <div className="bulles"><img src={poisson} className="image-align-left" alt="Petit poisson" /></div>
+        <div className="bulles"><img src={poisson2} className="image-align-left" alt="Petit poisson" /></div>
       </div>
       <div className="container">
         <div className="bulles"><img src={poisson} className="image-align-right" alt="Petit poisson" /></div>
