@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import malacy from './PetitPoisson.png'
+import poisson from './2560px-Common_goldfish_silhouette.svg.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import MoviesTable from '../../components/MoviesTable/MoviesTable';
@@ -44,12 +45,15 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
+      <div className="bulles"> <img src={poisson} className="image-align-left" alt="Poisson qui flotte" /> </div>
+      <div className="bulles"> <img src={poisson} className="image-align-right" alt="Poisson qui flotte" /> </div>
         <label htmlFor="textInput">Rechercher un film :
           <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
         </label>
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
+
         <p>
           <button onClick={prev_page}>
             prev</button> {page} <button onClick={next_page}>
