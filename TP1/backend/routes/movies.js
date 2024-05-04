@@ -51,8 +51,10 @@ router.post('/newmovie', (req, res) => {
       .get(`https://api.themoviedb.org/3/movie/${id}?api_key=57359ff087905e870d40ba4880a1dce0`)
       .then((response) => {
         const newMovie = movieRepository.create({
+          id: response.data.id,
           name: response.data.original_title,
           date: response.data.release_date,
+          image: response.data.poster_path,
         });
       movieRepository
         .insert(newMovie)
@@ -69,7 +71,7 @@ router.post('/newmovie', (req, res) => {
               message: `Le film ${newMovie.name} existe déjà`,
             });
           } else {
-            res.status(500).json({ message: `Erreur dans l\'ajout du film d\'id : ${id}. et de nom : ${response.original_title}`});
+            res.status(500).json({ message: `Erreur dans l\'ajout du film d\'id : ${id}. et de nom : ${response.data.original_title}`});
           }
         })
     })

@@ -2,8 +2,8 @@ import typeorm from "typeorm";
 
 const { MigrationInterface, QueryRunner } = typeorm;
 
-export default class Modiftablemovie1714828391061 {
-    name = 'Modiftablemovie1714828391061'
+export default class Modiftablemovie1714829637349 {
+    name = 'Modiftablemovie1714829637349'
 
     async up(queryRunner) {
         await queryRunner.query(`
