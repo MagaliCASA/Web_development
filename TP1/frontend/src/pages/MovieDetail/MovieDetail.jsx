@@ -9,6 +9,8 @@ function MovieDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(null); // Stocke l'URL de l'image d'arrière-plan
+  const [trailerUrl, setTrailerUrl] = useState(null); // Stocke l'URL de la bande annonce
+  const [rating, setRating] = useState(0); // Stocke la note donnée par l'utilisateur (par défaut, 0 étoiles)
 
   useEffect(() => {
     // Faites un appel API pour récupérer les détails du film en fonction de movieId
@@ -25,6 +27,20 @@ function MovieDetail() {
       });
   }, [movieId]);
 
+  // Fonction pour enregistrer la note dans la base de données
+  const saveRating = () => {
+    // Envoyer la note au backend pour enregistrement
+    axios.post(`URL_DU_BACKEND`, { movieId, rating })
+      .then(response => {
+        console.log('Note enregistrée avec succès:', response.data);
+        // Vous pouvez afficher un message de confirmation ou effectuer d'autres actions si nécessaire
+      })
+      .catch(error => {
+        console.error('Erreur lors de l\'enregistrement de la note:', error);
+        // Vous pouvez gérer les erreurs de manière appropriée
+      });
+  };
+
   // Si les données du film sont en cours de chargement, affichez un message de chargement
   if (loading) {
     return <div>Chargement...</div>;
@@ -35,21 +51,44 @@ function MovieDetail() {
     return <div>Une erreur s'est produite : {error.message}</div>;
   }
 
+  // Fonction pour ouvrir la bande annonce en grand
+  const openTrailer = () => {
+    window.open(trailerUrl, '_blank');
+  };
+
+  // Fonction pour mettre à jour la note lorsqu'une étoile est cliquée
+  const handleStarClick = (starValue) => {
+    // Vérifier si la note actuelle est égale à la valeur de l'étoile cliquée
+    // Si c'est le cas, définir la note sur 0 pour annuler la note précédente
+    const newRating = starValue === rating ? 0 : starValue;
+    setRating(newRating);
+  };
+
   // Affichez les détails du film une fois qu'ils sont disponibles
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '800px', padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
         <h1 style={{ fontSize: '2em', textAlign: 'center', color: 'black' }}>{movie.title}</h1>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} style={{ width: '200px', marginRight: '20px' }} />
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} style={{ width: '200px', marginRight: '20px', cursor: 'pointer' }} onClick={() => openTrailer()} />
           <div>
             <p style={{ color: 'black' }}><strong><u>Date de sortie :</u></strong> {movie.release_date}</p>
-            <p style={{ color: 'black' }}><strong><u>Langue originale :</u></strong> {movie.original_language}</p>
+            <p style={{ color: 'black' }}><strong><u>Langue originale :</u></strong> {movie.spoken_languages[0].name}</p>
+            <p style={{ color: 'black' }}><strong><u>Genres :</u></strong> {movie.genres.map(genre => genre.name).join(', ')}</p>
             <p style={{ color: 'black' }}><strong><u>Synopsis :</u></strong> {movie.overview}</p>
+            <p style={{ color: 'black' }}><strong><u>Une production de :</u></strong> {movie.production_companies.map(production_companies => production_companies.name).join(', ')}</p>
             <p style={{ color: 'black' }}><strong><u>Popularité :</u></strong> {movie.popularity}</p>
             <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie.vote_average}</p>
             <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie.vote_count}</p>
             <p style={{ color: 'black' }}><strong><u>Adulte :</u></strong> {movie.adult ? 'Oui' : 'Non'}</p>
+            {/* Affichage des étoiles pour la notation */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              {[1, 2, 3, 4, 5].map((starValue) => (
+                <span key={starValue} style={{ cursor: 'pointer', color: starValue <= rating ? 'yellow' : 'gray' }} onClick={() => handleStarClick(starValue)}>★</span>
+              ))}
+            </div>
+            {/* Bouton pour enregistrer la note */}
+            <button onClick={saveRating}>Enregistrer</button>
           </div>
         </div>
       </div>
