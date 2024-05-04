@@ -75,18 +75,22 @@
   }
 }
 
+.container {
+  position: relative; /* Assurez-vous que le conteneur a une position relative pour positionner les éléments enfants absolus */
+}
+
 .bulles {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background-image: url('./PetitPoisson.png');
+  background-image: url('bulles.svg');
   background-size: contain;
   animation: monteDescend 5s ease-in-out infinite; /* Ajustez la durée de l'animation selon vos préférences */
-  clear : both;
+  pointer-events: none;
 }
+
 
 .image-align-left {
   float: left; /* Aligne l'image à gauche */
@@ -101,3 +105,4 @@
   width: 20%;
   height: 20%;
 }
+
