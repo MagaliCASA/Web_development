@@ -1,6 +1,7 @@
 import express from 'express';
 import { appDataSource } from '../datasource.js';
 import Movie from '../entities/movie.js';
+import axios from 'axios';
 
 const router = express.Router();
 
@@ -50,11 +51,8 @@ router.post('/newmovie', (req, res) => {
       .get(`https://api.themoviedb.org/3/movie/${id}?api_key=57359ff087905e870d40ba4880a1dce0`)
       .then((response) => {
         const newMovie = movieRepository.create({
-          genre: response.genres,
-          date: response.release_date,
-          title: response.original_title,
-          resume: response.overview,
-          affiche: response.poster_path,
+          name: response.data.original_title,
+          date: response.data.release_date,
         });
       movieRepository
         .insert(newMovie)
@@ -71,7 +69,7 @@ router.post('/newmovie', (req, res) => {
               message: `Le film ${newMovie.name} existe déjà`,
             });
           } else {
-            res.status(500).json({ message: 'Erreur dans l\'ajout du film'});
+            res.status(500).json({ message: `Erreur dans l\'ajout du film d\'id : ${id}. et de nom : ${response.original_title}`});
           }
         })
     })
