@@ -3,12 +3,8 @@ import typeorm from 'typeorm';
 const Movie = new typeorm.EntitySchema({
   name: 'Movie',
   columns: {
-    id: {
-      primary: true,
-      type: Number,
-      unique: true,
-    },
     name: {
+      primary: true,
       type: String,
       unique: true,
     },
@@ -16,10 +12,6 @@ const Movie = new typeorm.EntitySchema({
       type: String,
       unique: false,
     },
-    image: {
-      type: String,
-      unique: true,
-    }
   },
 });
 
