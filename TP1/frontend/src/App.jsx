@@ -12,7 +12,6 @@ function App() {
     <Root>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="counter" element={<Counter />} />
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
         <Route path="movie_detail/:movieId/:movieId2" element={<MovieDetail />} />
