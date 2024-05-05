@@ -9,6 +9,7 @@ const Note = new typeorm.EntitySchema({
         type: String,
       },
     note: { type: Number },
+    movieId: { type: Number },
   },
 });
 

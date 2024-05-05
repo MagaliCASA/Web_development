@@ -29,4 +29,16 @@ router.post('/new', (req, res) => {
       })
 });
 
+router.delete('/delete', (req,res) => {
+    const noteRepository = appDataSource.getRepository(Note);
+  
+    noteRepository
+      .delete(req.body.rating)
+      .then(() => {
+        res.json({
+          message: `La note ${req.body.rating} a bien été supprimée`
+        })
+      })
+  });
+
 export default router;
