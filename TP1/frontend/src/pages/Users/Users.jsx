@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './Users.css';
 import AddUserForm from '../../components/AddUserForm/AddUserForm';
+import ConnectUserForm from '../../components/ConnectUserForm';
 import UsersTable from '../../components/UsersTable/UsersTable';
 
 function Users() {
@@ -16,6 +17,8 @@ function Users() {
       <h1>Créer un compte</h1>
       <AddUserForm />
       {/* <UsersTable /> */}
+      <h1>Se connecter</h1>
+      <ConnectUserForm />
     </div>
   );
 }
