@@ -42,7 +42,7 @@ function MovieDetail() {
   // Fonction pour enregistrer la note dans la base de données
   const saveRating = () => {
     // Envoyer la note au backend pour enregistrement
-    axios.post(`URL_DU_BACKEND`, { movieId, rating })
+    axios.post(`http://localhost:8080/api/notes/new`, { movieId, rating })
       .then(response => {
         console.log('Note enregistrée avec succès:', response.data);
         // Vous pouvez afficher un message de confirmation ou effectuer d'autres actions si nécessaire

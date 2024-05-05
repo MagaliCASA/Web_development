@@ -7,8 +7,7 @@ const router = express.Router();
 router.post('/new', (req, res) => {
     const noteRepository = appDataSource.getRepository(Note);
     const newNote = noteRepository.create({
-        name: req.body.name,
-        date: req.body.date,
+        note: req.body.rating
       });
 
     noteRepository
