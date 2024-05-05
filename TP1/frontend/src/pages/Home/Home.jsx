@@ -12,6 +12,7 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [movieName, setMovieName] = useState("");
 
+  const [minRating, setMinRating] = useState(0);
   const [page, setPage] = useState(1);
   const next_page = (event) => {
     if (page != 10) { setPage(page + 1); }
@@ -52,20 +53,31 @@ function Home() {
         <div className="bulles"><img src={poisson} className="image-align-right" alt="Petit poisson" /></div>
       </div>
       <header className="App-header">
-        <label htmlFor="textInput">Rechercher un film :
-          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
-        </label>
+        
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
-
+        <label htmlFor="textInput">Rechercher un film :
+          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
+          <br/> 
+          note minimal : {minRating}<br/> 
+          <input 
+                type="range" 
+                min="0" 
+                max="10" 
+                step="0.1" 
+                value={minRating} 
+                onChange={e => setMinRating(parseFloat(e.target.value))} 
+                style={{ width: '80%', marginBottom: '20px' }} 
+            />      
+        </label>
         <p>
           <button onClick={prev_page}>
             prev</button> {page} <button onClick={next_page}>
             next</button>
         </p>
 
-        <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
+        <MoviesTable page={page} search={movieName} note_min={minRating} > </MoviesTable>
 
         <p>
           <button onClick={prev_page}>
