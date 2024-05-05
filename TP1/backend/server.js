@@ -3,7 +3,8 @@ import path from 'path';
 import logger from 'morgan';
 import cors from 'cors';
 import usersRouter from './routes/users.js';
-import moviesRouter from './routes/movies.js'
+import moviesRouter from './routes/movies.js';
+import notesRouter from './routes/notes.js';
 import { routeNotFoundJsonHandler } from './services/routeNotFoundJsonHandler.js';
 import { jsonErrorHandler } from './services/jsonErrorHandler.js';
 import { appDataSource } from './datasource.js';
@@ -27,6 +28,7 @@ appDataSource
     });
     apiRouter.use('/users', usersRouter);
     apiRouter.use('/movies', moviesRouter);
+    apiRouter.use('/notes',notesRouter);
 
     // Register API router
     app.use('/api', apiRouter);
