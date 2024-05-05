@@ -4,6 +4,15 @@ import Note from '../entities/note.js';
 
 const router = express.Router();
 
+router.get('/', function (req, res) {
+    appDataSource
+      .getRepository(Note)
+      .find({})
+      .then(function (notes) {
+        res.json({ notes: notes });
+      });
+  });
+
 router.post('/new', (req, res) => {
     const noteRepository = appDataSource.getRepository(Note);
     const newNote = noteRepository.create({
