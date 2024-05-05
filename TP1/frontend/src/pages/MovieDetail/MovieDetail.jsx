@@ -2,7 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+async function fetchMovieNotesAndUpdateStats(movieId, oldAverage, oldTotalVotes) {
+  try {
+    // Effectuer une requête GET vers l'endpoint backend pour récupérer les notes du film
+    const response = await axios.get(`/api/notes/${movieId}/notes`);
+    const { notes, newAverage, totalNotes } = response.data;
 
+    return {newAverage , totalNotes};
+
+    // Vous pouvez maintenant mettre à jour votre interface utilisateur avec les nouvelles statistiques
+  } catch (error) {
+    console.error('Une erreur est survenue lors de la récupération des notes du film:', error);
+    // Gérez l'erreur de manière appropriée dans votre application
+  }
+}
 
 function MovieDetail() {
   const params = useParams(); // Récupère l'identifiant du film de l'URL
@@ -85,6 +98,8 @@ function MovieDetail() {
     saveRating(); // Enregistrer la note
   };
 
+  const {newAverage, totalNotes} = fetchMovieNotesAndUpdateStats(movieId, movie.vote_average, movie.vote_count)
+
   // Affichez les détails du film une fois qu'ils sont disponibles
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
@@ -100,8 +115,8 @@ function MovieDetail() {
             <p style={{ color: 'black' }}><strong><u>Synopsis :</u></strong> {movie && movie.overview}</p>
             <p style={{ color: 'black' }}><strong><u>Une production de :</u></strong> {movie && movie.production_companies.map(production_companies => production_companies.name).join(', ')}</p>
             <p style={{ color: 'black' }}><strong><u>Popularité :</u></strong> {movie && movie.popularity}</p>
-            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && movie.vote_average}</p>
-            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && movie.vote_count}</p>
+            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && newAverage}</p>
+            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && totalNotes}</p>
             {/* Affichage des étoiles pour la notation */}
             {voting && (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
