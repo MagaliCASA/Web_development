@@ -7,6 +7,7 @@ const router = express.Router();
 router.post('/new', (req, res) => {
     const noteRepository = appDataSource.getRepository(Note);
     const newNote = noteRepository.create({
+        movieId: req.body.movieId,
         note: req.body.rating
       });
 
