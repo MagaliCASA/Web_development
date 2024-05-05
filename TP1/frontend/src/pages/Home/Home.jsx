@@ -12,6 +12,7 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [movieName, setMovieName] = useState("");
 
+  const [minRating, setMinRating] = useState(0);
   const [page, setPage] = useState(1);
   const next_page = (event) => {
     if (page != 10) { setPage(page + 1); }
@@ -19,7 +20,15 @@ function Home() {
   const prev_page = (event) => {
     if (page != 1) { setPage(page - 1); }
   }
+  //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
+  const [sortName, setSortName] = useState("Pas de tri");
+  const next_sort = (event) => {    
+    if (sortName == "film ancien") { setSortName("Pas de tri");}
+    if (sortName == "Pas de tri") { setSortName("film recent");}
+    if (sortName == "film recent") { setSortName("film ancien");}
 
+
+  }
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
@@ -61,20 +70,33 @@ function Home() {
         {loggedIn ? <div>Your email address is {email}</div> : <div />}
       </div>
       <header className="App-header">
-        <label htmlFor="textInput">Rechercher un film :
-          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
-        </label>
+        
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
-
+        <label htmlFor="textInput">Rechercher un film :
+          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
+          <br/> 
+          note minimal : {minRating}<br/> 
+          <input 
+                type="range" 
+                min="0" 
+                max="10" 
+                step="0.1" 
+                value={minRating} 
+                onChange={e => setMinRating(parseFloat(e.target.value))} 
+                style={{ width: '80%', marginBottom: '20px' }} 
+            /> <br/> 
+            <button onClick={next_sort}>
+            {sortName}</button>     
+        </label>
         <p>
           <button onClick={prev_page}>
             prev</button> {page} <button onClick={next_page}>
             next</button>
         </p>
 
-        <MoviesTable page={page} search={movieName} note_min={0} > </MoviesTable>
+        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName}> </MoviesTable>
 
         <p>
           <button onClick={prev_page}>
