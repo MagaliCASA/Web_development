@@ -4,8 +4,8 @@ import './AddUserForm.css';
 
 const DEFAULT_FORM_VALUES = {
   email: '',
-  firstname: '',
-  lastname: '',
+  name: '',
+  password: '',
 };
 
 const useSaveUser = () => {
