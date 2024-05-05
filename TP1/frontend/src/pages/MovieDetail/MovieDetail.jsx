@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
+
 function MovieDetail() {
   const params = useParams(); // Récupère l'identifiant du film de l'URL
   const movieId = params.movieId;
@@ -43,7 +44,7 @@ function MovieDetail() {
   // Fonction pour enregistrer la note dans la base de données
   const saveRating = () => {
     // Envoyer la note au backend pour enregistrement
-    axios.post(`http://localhost:8080/api/notes/new`, { movieId, rating })
+    axios.post(`${import.meta.env.VITE_BACKDEND_URL}/notes/new`, { movieId, rating })
       .then(response => {
         console.log('Note enregistrée avec succès:', response.data);
         // Vous pouvez afficher un message de confirmation ou effectuer d'autres actions si nécessaire
