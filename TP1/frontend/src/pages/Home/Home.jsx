@@ -20,7 +20,15 @@ function Home() {
   const prev_page = (event) => {
     if (page != 1) { setPage(page - 1); }
   }
+  //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
+  const [sortName, setSortName] = useState("Pas de tri");
+  const next_sort = (event) => {    
+    if (sortName == "film ancien") { setSortName("Pas de tri");}
+    if (sortName == "Pas de tri") { setSortName("film recent");}
+    if (sortName == "film recent") { setSortName("film ancien");}
 
+
+  }
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
@@ -69,7 +77,9 @@ function Home() {
                 value={minRating} 
                 onChange={e => setMinRating(parseFloat(e.target.value))} 
                 style={{ width: '80%', marginBottom: '20px' }} 
-            />      
+            /> <br/> 
+            <button onClick={next_sort}>
+            {sortName}</button>     
         </label>
         <p>
           <button onClick={prev_page}>
@@ -77,7 +87,7 @@ function Home() {
             next</button>
         </p>
 
-        <MoviesTable page={page} search={movieName} note_min={minRating} > </MoviesTable>
+        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName}> </MoviesTable>
 
         <p>
           <button onClick={prev_page}>
