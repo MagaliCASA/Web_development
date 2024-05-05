@@ -13,9 +13,9 @@ function Users() {
 
   return (
     <div className="Users-container">
-      <h1>Cette page permet de se connecter.</h1>
-      <AddUserForm onAddUser={handleAddUser} />
-      <UsersTable users={users} />
+      <h1>This page displays the users</h1>
+      <AddUserForm />
+      {/* <UsersTable /> */}
     </div>
   );
 }

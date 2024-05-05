@@ -4,8 +4,8 @@ import './AddUserForm.css';
 
 const DEFAULT_FORM_VALUES = {
   email: '',
-  firstname: '',
-  lastname: '',
+  name: '',
+  password: '',
 };
 
 const useSaveUser = () => {
@@ -65,18 +65,18 @@ function AddUserForm() {
         />
         <input
           className="add-user-input"
-          placeholder="First name"
-          value={formValues.firstname}
+          placeholder="Name"
+          value={formValues.name}
           onChange={(event) =>
-            setFormValues({ ...formValues, firstname: event.target.value })
+            setFormValues({ ...formValues, name: event.target.value })
           }
         />
         <input
           className="add-user-input"
-          placeholder="Last name"
-          value={formValues.lastname}
+          placeholder="Password"
+          value={formValues.password}
           onChange={(event) =>
-            setFormValues({ ...formValues, lastname: event.target.value })
+            setFormValues({ ...formValues, password: event.target.value })
           }
         />
         <button className="add-user-button" type="submit">
