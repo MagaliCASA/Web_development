@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import './Users.css';
 import AddUserForm from '../../components/AddUserForm/AddUserForm';
-import ConnectUserForm from '../../components/ConnectUserForm';
 import UsersTable from '../../components/UsersTable/UsersTable';
 
 function Users() {
