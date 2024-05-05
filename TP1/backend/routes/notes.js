@@ -13,6 +13,31 @@ router.get('/', function (req, res) {
       });
   });
 
+  router.get('/:movieId/notes', async (req, res) => {
+    try {
+      const { movieId } = req.params;
+      
+      // Récupérer toutes les notes pour le movieId spécifié depuis la base de données
+      const noteRepository = getRepository(Note);
+      const notes = await noteRepository.find({ where: { movieId } });
+  
+      // Calculer la nouvelle moyenne et le nouveau nombre total de votes
+      let totalVotes = 0;
+      let totalNotes = 0;
+      notes.forEach(note => {
+        totalVotes += note.note;
+        totalNotes++;
+      });
+      const newAverage = totalVotes / totalNotes;
+  
+      // Envoyer les notes récupérées, la nouvelle moyenne et le nouveau nombre total de votes en réponse
+      res.json({ notes, newAverage, totalNotes });
+    } catch (error) {
+      console.error('Erreur lors de la récupération des notes:', error);
+      res.status(500).json({ message: 'Erreur lors de la récupération des notes' });
+    }
+  });
+
 router.post('/new', (req, res) => {
     const noteRepository = appDataSource.getRepository(Note);
     const newNote = noteRepository.create({
