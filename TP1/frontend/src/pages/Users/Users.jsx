@@ -17,7 +17,6 @@ function Users() {
       <AddUserForm />
       {/* <UsersTable /> */}
       <h1>Se connecter</h1>
-      <ConnectUserForm />
     </div>
   );
 }
