@@ -16,8 +16,6 @@ function App() {
         <Route path="users" element={<Users />} />
         <Route path="about" element={<About />} />
         <Route path="movie_detail/:movieId/:movieId2" element={<MovieDetail />} />
-        <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
       </Routes>
     </Root>
   );

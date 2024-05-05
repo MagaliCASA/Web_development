@@ -60,24 +60,14 @@ function Home() {
       <div className="container">
         <div className="bulles"><img src={poisson} className="image-align-right" alt="Petit poisson" /></div>
       </div>
-      <div className={'buttonContainer'}>
-        <input
-          className={'inputButton'}
-          type="button"
-          onClick={onButtonClick}
-          value={loggedIn ? 'Log out' : 'Log in'}
-        />
-        {loggedIn ? <div>Your email address is {email}</div> : <div />}
-      </div>
       <header className="App-header">
-        
         <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
         <label htmlFor="textInput">Rechercher un film :
           <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
           <br/> 
-          note minimal : {minRating}<br/> 
+          Note minimale : {minRating}<br/> 
           <input 
                 type="range" 
                 min="0" 
