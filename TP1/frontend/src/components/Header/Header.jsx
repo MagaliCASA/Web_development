@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
@@ -8,9 +9,19 @@ const Header = () => {
         Page d'accueil
       </Link>
       <div>|</div>
-      <Link className="Link" to="/users">
-        Me connecter
-      </Link>
+      <div className="connect-dropdown">
+        <Link className="Link" to="/login">
+          Mon Compte
+        </Link>
+        <div className="dropdown-content">
+          <Link className="dropdown-link" to="/login">
+            Se connecter
+          </Link>
+          <Link className="dropdown-link" to="/register">
+            Créer un compte
+          </Link>
+        </div>
+      </div>
       <div>|</div>
       <Link className="Link" to="/about">
         A propos du site

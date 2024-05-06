@@ -6,11 +6,42 @@
   font-size: calc(10px + 2vmin);
 }
 
-.Header-container > :not(:last-child) {
+.Header-container> :not(:last-child) {
   margin-right: 10px;
 }
 
 .Link {
   font-weight: 700;
   color: white;
+}
+
+/* Header.css */
+
+.connect-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.connect-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-link {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-link:hover {
+  background-color: #f1f1f1;
 }
