@@ -11,7 +11,7 @@
 }
 
 .Link {
-  font-weight: 700;
+  font-weight: 500;
   color: white;
 }
 
@@ -31,6 +31,10 @@
   z-index: 1;
   border-radius: 8px;
   /* Angles arrondis */
+  flex-direction: row;
+  /* Mettre les liens sur la même ligne */
+  padding: 8px;
+  /* Ajouter un peu de padding pour l'espace entre les liens */
 }
 
 .connect-dropdown:hover .dropdown-content {
@@ -39,10 +43,17 @@
 
 .dropdown-link {
   color: black;
-  padding: 8px 16px;
+  padding: 2px 2px;
   text-decoration: none;
   display: inline-block;
-  /* Afficher les liens sur la même ligne */
+  font-size: 20px;
+  /* Changer la taille de la police */
+  margin-right: 1px;
+  /* Ajouter une marge à droite */
+  text-align: center;
+  /* Centrer le texte horizontalement */
+  line-height: 24px;
+  /* Ajuster la hauteur de ligne pour centrer verticalement */
 }
 
 .dropdown-link:hover {

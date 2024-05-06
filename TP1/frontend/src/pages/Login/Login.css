@@ -26,7 +26,8 @@
   /* Espacement entre le titre et le formulaire */
 }
 
-.form-section p {
+.form-section,
+.connected-user-section p {
   margin-top: 10px;
   /* Espacement entre le formulaire et le paragraphe */
 }
