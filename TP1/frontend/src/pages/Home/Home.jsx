@@ -26,9 +26,21 @@ function Home() {
     if (sortName == "film ancien") { setSortName("Pas de tri");setMovieName(""); }
     if (sortName == "Pas de tri") { setSortName("film recent");setMovieName("----"); }
     if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
-
-
   }
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleChange = (event) => {
+    const options = event.target.options;
+    const selectedValues = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedValues.push(options[i].value);
+      }
+    }
+    setSelectedOptions(selectedValues);
+  };
+
+
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
@@ -79,7 +91,18 @@ function Home() {
           /> <br />
           <button onClick={next_sort}>
             {sortName}</button>
+
+            
         </label>
+        <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </select>
+            {selectedOptions.length > 0 && (
+                <p>Vous avez sélectionné : {selectedOptions.join(', ')}</p>
+            )}
         <p>
           <button className="pagination-button" onClick={prev_page}>
             Page précédente
