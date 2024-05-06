@@ -17,19 +17,19 @@ function MoviesTable(props) {
 
   async function getPopularMovies(basepage) {
     try {
-      var demande = "movie/popular";
+      var demande = "movie/popular?api_key="+apiKey;
       if (props.search != "") {
-        demande = "search/movie";
+        demande = "search/movie?api_key="+apiKey+"&query="+props.search;
       }
       if (props.sort_type != "Pas de tri")
       {
-        demande = "discover/movie";
         if (props.sort_type == "film recent"){sort = "primary_release_date.desc";}
         if (props.sort_type == "film ancien"){sort = "primary_release_date.asc";}
+        demande = "discover/movie?api_key="+apiKey+"&sort_by="+sort;
       } 
       
       //&page=${props.page}
-      const response = await axios.get(`${baseUrl}${demande}?api_key=${apiKey}&page=${basepage}&query=${props.search}&sort_by=${sort}`);
+      const response = await axios.get(`${baseUrl}${demande}&page=${basepage}`);
       //console.log(response.data.results);
       const movies = response.data.results.map(movie => {
         if(movie.vote_average>=props.note_min){
