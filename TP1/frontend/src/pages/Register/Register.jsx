@@ -25,15 +25,9 @@ function Users() {
         <AddUserForm />
       </div>
       <div className="login-link">
-        <p>Déjà un compte ? <a href="#connexion">Connectez-vous !</a></p>
-      </div>
-      <div className="form-section">
-        <h1>Se connecter</h1>
-        <ConnectUserForm />
-      </div>
-      <div className="connected-user-section">
-        <h1>Nom de l'utilisateur connecté :</h1>
-        <p>{name}</p>
+        <div className="login-link">
+          <p>Déjà un compte ? <a href="../login" className="login-link-text">Connectez-vous !</a></p>
+        </div>
       </div>
 
     </div>

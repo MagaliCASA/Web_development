@@ -34,3 +34,21 @@
 .connected-user-section button:hover {
   background-color: #0056b3;
 }
+
+.login-link p {
+  font-family: Arial, sans-serif;
+  /* Choisir la police de votre choix */
+  font-size: 25px;
+  /* Choisir la taille de la police de votre choix */
+  color: #ffffff;
+  /* Choisir la couleur de votre choix */
+  margin-top: 10px;
+  /* Ajouter de l'espace en haut du paragraphe */
+}
+
+/* Register.css */
+
+.login-link-text {
+  color: #007bff;
+  /* Choisissez la couleur de votre choix */
+}

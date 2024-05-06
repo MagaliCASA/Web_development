@@ -1,8 +1,12 @@
 .about {
-  text-align: center;
+  text-align: justify;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.about-title {
+  text-align: center;
 }
 
 .about h1 {

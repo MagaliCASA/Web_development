@@ -20,19 +20,11 @@ function Users() {
   return (
     <div className="Users-container">
       <div className="form-section">
-        <h1>Créer un compte</h1>
-        <AddUserForm />
-      </div>
-      <div className="login-link">
-        <p>Déjà un compte ? <a href="#connexion">Connectez-vous !</a></p>
-      </div>
-      <div className="form-section">
         <h1>Se connecter</h1>
         <ConnectUserForm />
       </div>
       <div className="connected-user-section">
-        <h1>Nom de l'utilisateur connecté :</h1>
-        <p>{name}</p>
+        <p>Pas de compte ? <a href="../Register" className="login-link-text">Inscrivez-vous !</a></p>
       </div>
 
     </div>
