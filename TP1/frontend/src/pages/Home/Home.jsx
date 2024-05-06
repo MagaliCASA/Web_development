@@ -28,6 +28,7 @@ function Home() {
     if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
   }
   const [selectedOptions, setSelectedOptions] = useState([]);
+   
   const [genres, setGenres] = useState("");
   const handleChange = (event) => {
     const options = event.target.options;
@@ -38,9 +39,11 @@ function Home() {
       }
     }
     setSelectedOptions(selectedValues);
+    setGenres(selectedValues.join(','));
+    setMovieName(selectedValues.join(','));
   };
 
-
+  // rendu obselete par MoviesTable
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=57359ff087905e870d40ba4880a1dce0`)
@@ -96,14 +99,18 @@ function Home() {
         </label>
         <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
         <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                <option value="option4">Option 4</option>
+                <option value="">------</option>
+                <option value="16">Animation</option>
+                <option value="12">Aventure</option>
+                <option value="27">Horreur</option>
+                <option value="35">Comédie</option>
+                <option value="28">Action</option>
+                <option value="878">Science-Fiction</option>
+                <option value="53">Thriller</option>
+                <option value="10751">Famille</option>
+                <option value="14">Fantaisie</option>
+                
             </select>
-            {selectedOptions.length > 0 && (
-                <p>Vous avez sélectionné : {selectedOptions.join(', ')}</p>
-            )}
         <p>
           <button className="pagination-button" onClick={prev_page}>
             Page précédente
