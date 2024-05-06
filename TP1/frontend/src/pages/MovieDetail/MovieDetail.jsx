@@ -31,20 +31,65 @@ function MovieDetail() {
   const [comments, setComments] = useState([]); // Stocke les commentaires du film
   const [commenting, setCommenting] = useState(true); // Boolean pour afficher ou non le champ de commentaire
   const [voting, setVoting] = useState(true); // Boolean pour afficher ou non les étoiles de vote
+  const [noteAvg, setNoteAvg] = useState(0);
+  const [nbNotes, setNbNotes] = useState(0);
 
   useEffect(() => {
     // Faites un appel API pour récupérer les détails du film en fonction de movieId
     axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=57359ff087905e870d40ba4880a1dce0`)
-      .then(response => {
-        setMovie(response.data); // Met à jour l'état avec les données du film
-        setBackgroundImage(`https://image.tmdb.org/t/p/original${response.data.backdrop_path}`); // Met à jour l'URL de l'image d'arrière-plan
+      .then(response1 => {
+        setMovie(response1.data); // Met à jour l'état avec les données du film
+        setBackgroundImage(`https://image.tmdb.org/t/p/original${response1.data.backdrop_path}`); // Met à jour l'URL de l'image d'arrière-plan
+        axios
+          .get(`${import.meta.env.VITE_BACKDEND_URL}/notes/${movieId}/notes/`)
+          .then((response) => {
+            const notes = response.data.notes;
+            var sommenote = 0;
+            var nbnotessaved = 0;
+            notes.map(note => {
+              sommenote += note.note;
+              nbnotessaved++;
+            })
+            const avgtemp = (response1.data.vote_average * response1.data.vote_count + 2*sommenote)/(response1.data.vote_count + nbnotessaved);
+            const notestemp = response1.data.vote_count + nbnotessaved;
+            setNoteAvg(avgtemp.toFixed(2));
+            setNbNotes(notestemp);
+
+          })
+          .catch(error => {
+            console.error('Erreur lors de l\'enregistrement de la note:', error);
+            // Vous pouvez gérer les erreurs de manière appropriée
+          });
         setLoading(false); // Met à jour l'état de chargement
+        axios
+          .get(`${import.meta.env.VITE_BACKDEND_URL}/comments/${movieId}/comments/`)
+          .then((response2) => {
+            //  // Tri des commentaires par ID (du plus récent au plus ancien)
+            // const sortedComments = response2.data.comments.sort((a, b) => {
+            //   return b.id - a.id;
+            // });
+
+            // // Extraire les trois premiers commentaires
+            // const lastThreeComments = sortedComments.slice(0, 3);
+
+            // // Utiliser lastThreeComments pour afficher les commentaires dans votre interface utilisateur
+            // console.log(lastThreeComments);
+
+            const commentsdatabase = response2.data.comments;
+            const allComments = comments.concat(commentsdatabase.map(comment => comment.comment));
+            setComments(allComments);
+            // setComments(response2.data.comments);
+          })
+          .catch(error => {
+            console.error('Erreur lors de l\'enregistrement de la note:', error);
+            // Vous pouvez gérer les erreurs de manière appropriée
+          });
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des détails du film:', error);
         setError(error); // Met à jour l'état d'erreur
         setLoading(false); // Met à jour l'état de chargement
-      });
+       });
   }, [movieId]);
 
   useEffect(() => {
@@ -115,8 +160,8 @@ function MovieDetail() {
             <p style={{ color: 'black' }}><strong><u>Synopsis :</u></strong> {movie && movie.overview}</p>
             <p style={{ color: 'black' }}><strong><u>Une production de :</u></strong> {movie && movie.production_companies.map(production_companies => production_companies.name).join(', ')}</p>
             <p style={{ color: 'black' }}><strong><u>Popularité :</u></strong> {movie && movie.popularity}</p>
-            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && movie.vote_average}</p>
-            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && movie.vote_count}</p>
+            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && noteAvg}</p>
+            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && nbNotes}</p>
             {/* Affichage des étoiles pour la notation */}
             {voting && (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -149,9 +194,9 @@ function MovieDetail() {
             {/* Affichage des commentaires */}
             <div style={{ marginTop: '20px' }}>
               <h2 style={{ color: 'black' }}>Derniers commentaires :</h2>
-              <ul>
+              <ul style={{ listStyleType: 'none', padding: 0}}>
                 {comments.map((comment, index) => (
-                  <li key={index}>{comment}</li>
+                  <li key={index} style={{ color: 'black', border: '1px solid black'  }}>{comment}</li>
                 ))}
               </ul>
             </div>

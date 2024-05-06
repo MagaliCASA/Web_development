@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
       const { movieId } = req.params;
       
       // Récupérer toutes les notes pour le movieId spécifié depuis la base de données
-      const noteRepository = getRepository(Note);
+      const noteRepository = appDataSource.getRepository(Note);
       const notes = await noteRepository.find({ where: { movieId } });
   
       // Calculer la nouvelle moyenne et le nouveau nombre total de votes
