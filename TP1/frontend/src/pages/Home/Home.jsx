@@ -23,9 +23,9 @@ function Home() {
   //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
   const [sortName, setSortName] = useState("Pas de tri");
   const next_sort = (event) => {
-    if (sortName == "film ancien") { setSortName("Pas de tri"); }
-    if (sortName == "Pas de tri") { setSortName("film recent"); }
-    if (sortName == "film recent") { setSortName("film ancien"); }
+    if (sortName == "film ancien") { setSortName("Pas de tri");setMovieName(""); }
+    if (sortName == "Pas de tri") { setSortName("film recent");setMovieName("----"); }
+    if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
 
 
   }
