@@ -29,6 +29,8 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 8px;
+  /* Angles arrondis */
 }
 
 .connect-dropdown:hover .dropdown-content {
@@ -37,9 +39,10 @@
 
 .dropdown-link {
   color: black;
-  padding: 12px 16px;
+  padding: 8px 16px;
   text-decoration: none;
-  display: block;
+  display: inline-block;
+  /* Afficher les liens sur la même ligne */
 }
 
 .dropdown-link:hover {
