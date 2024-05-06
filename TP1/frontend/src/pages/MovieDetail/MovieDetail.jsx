@@ -72,7 +72,7 @@ function MovieDetail() {
   // Fonction pour enregistrer le commentaire dans la base de données
   const saveComment = () => {
     // Envoyer le commentaire au backend pour enregistrement
-    axios.post(`URL_DU_BACKEND`, { movieId, comment })
+    axios.post(`${import.meta.env.VITE_BACKDEND_URL}/comments/new`, { movieId, comment })
       .then(response => {
         console.log('Commentaire enregistré avec succès:', response.data);
         // Mettre à jour la liste des commentaires
@@ -98,7 +98,7 @@ function MovieDetail() {
     saveRating(); // Enregistrer la note
   };
 
-  const {newAverage, totalNotes} = fetchMovieNotesAndUpdateStats(movieId, movie.vote_average, movie.vote_count)
+  // const {newAverage, totalNotes} = fetchMovieNotesAndUpdateStats(movieId, movie.vote_average, movie.vote_count)
 
   // Affichez les détails du film une fois qu'ils sont disponibles
   return (
@@ -115,8 +115,8 @@ function MovieDetail() {
             <p style={{ color: 'black' }}><strong><u>Synopsis :</u></strong> {movie && movie.overview}</p>
             <p style={{ color: 'black' }}><strong><u>Une production de :</u></strong> {movie && movie.production_companies.map(production_companies => production_companies.name).join(', ')}</p>
             <p style={{ color: 'black' }}><strong><u>Popularité :</u></strong> {movie && movie.popularity}</p>
-            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && newAverage}</p>
-            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && totalNotes}</p>
+            <p style={{ color: 'black' }}><strong><u>Vote moyen :</u></strong> {movie && movie.vote_average}</p>
+            <p style={{ color: 'black' }}><strong><u>Nombre de votes :</u></strong> {movie && movie.vote_count}</p>
             {/* Affichage des étoiles pour la notation */}
             {voting && (
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
