@@ -5,7 +5,7 @@ function useTokenVerification() {
    const [name, setName] = useState("");
 
    useEffect(() => {
-       const user = JSON.parse(localStorage.getItem(""));
+       const user = JSON.parse(localStorage.getItem("user"));
 
        if (!user || !user.token) {
            setLoggedIn(false);
