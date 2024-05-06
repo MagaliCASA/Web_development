@@ -25,7 +25,6 @@ function Home() {
   }
   //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
   const [sortName, setSortName] = useState("Pas de tri");
-
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const [genres, setGenres] = useState("");
