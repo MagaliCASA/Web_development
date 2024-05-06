@@ -28,7 +28,7 @@ function Home() {
     if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
   }
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  const [genres, setGenres] = useState("");
   const handleChange = (event) => {
     const options = event.target.options;
     const selectedValues = [];
@@ -94,6 +94,7 @@ function Home() {
 
             
         </label>
+        <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
         <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
@@ -114,7 +115,7 @@ function Home() {
 
         </p>
 
-        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName}> </MoviesTable>
+        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName} genres ={genres}> </MoviesTable>
 
         <p>
           <button className="pagination-button" onClick={prev_page}>
