@@ -1,16 +1,18 @@
-// Users.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Users.css';
 import AddUserForm from '../../components/AddUserForm/AddUserForm';
 import ConnectUserForm from '../../components/ConnectUserForm/ConnectUserForm';
 import UsersTable from '../../components/UsersTable/UsersTable';
 import VerifyToken from '../../components/ConnectUserForm/VerifyToken';
 
-
 function Users() {
-  const {loggedIn, name} = VerifyToken();
+  const { loggedIn, name } = VerifyToken();
   const [users, setUsers] = useState([]);
   console.log("Name :", name);
+
+  useEffect(() => {
+    console.log("Le nom a changé :", name);
+  }, [name]); // Ajoutez 'name' dans le tableau de dépendances
 
   const handleAddUser = (newUser) => {
     setUsers([...users, newUser]);
