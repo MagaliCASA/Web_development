@@ -6,6 +6,8 @@ import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import MoviesTable from '../../components/MoviesTable/MoviesTable';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 function Home() {
@@ -23,12 +25,12 @@ function Home() {
   //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
   const [sortName, setSortName] = useState("Pas de tri");
   const next_sort = (event) => {
-    if (sortName == "film ancien") { setSortName("Pas de tri");setMovieName(""); }
-    if (sortName == "Pas de tri") { setSortName("film recent");setMovieName("----"); }
-    if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
+    if (sortName == "film ancien") { setSortName("Pas de tri"); setMovieName(""); }
+    if (sortName == "Pas de tri") { setSortName("film recent"); setMovieName("----"); }
+    if (sortName == "film recent") { setSortName("film ancien"); setMovieName("---- "); }
   }
   const [selectedOptions, setSelectedOptions] = useState([]);
-   
+
   const [genres, setGenres] = useState("");
   const handleChange = (event) => {
     const options = event.target.options;
@@ -41,6 +43,16 @@ function Home() {
     setSelectedOptions(selectedValues);
     setGenres(selectedValues.join(','));
     setMovieName(selectedValues.join(','));
+  };
+
+  const sort = (sortType) => {
+    if (sortType === "Pas de tri") {
+      setSortName("Pas de tri");
+      setMovieName("");
+    } else {
+      setSortName(sortType);
+      setMovieName("----");
+    }
   };
 
   // rendu obselete par MoviesTable
@@ -76,11 +88,14 @@ function Home() {
         <div className="bulles"><img src={poisson} className="image-align-right" alt="Petit poisson" /></div>
       </div>
       <header className="App-header">
-        <p>{movieName}</p>
         <img src={malacy} className="App-logo" alt="logo" />
         <h1>Recommendations de films</h1>
         <label htmlFor="textInput">Rechercher un film :
-          <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
+          <div className="search-container">
+            <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
+            <button className="search-button"><FontAwesomeIcon icon={faSearch} /></button>
+          </div>
+          <p>{movieName}</p>
           <br />
           Note minimale : {minRating}<br />
           <input
@@ -94,23 +109,29 @@ function Home() {
           /> <br />
           <button onClick={next_sort}>
             {sortName}</button>
-
-            
         </label>
         <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
         <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
-                <option value="">------</option>
-                <option value="16">Animation</option>
-                <option value="12">Aventure</option>
-                <option value="27">Horreur</option>
-                <option value="35">Comédie</option>
-                <option value="28">Action</option>
-                <option value="878">Science-Fiction</option>
-                <option value="53">Thriller</option>
-                <option value="10751">Famille</option>
-                <option value="14">Fantaisie</option>
-                
-            </select>
+          <option value="">------</option>
+          <option value="16">Animation</option>
+          <option value="12">Aventure</option>
+          <option value="27">Horreur</option>
+          <option value="35">Comédie</option>
+          <option value="28">Action</option>
+          <option value="878">Science-Fiction</option>
+          <option value="53">Thriller</option>
+          <option value="10751">Famille</option>
+          <option value="14">Fantaisie</option>
+
+        </select>
+        <div className="sort-container">
+          <label htmlFor="sort">Tri par :</label>
+          <div className="sort-buttons">
+            <button className={sortName === "Pas de tri" ? "active" : ""} onClick={() => sort("Pas de tri")}>Pas de tri</button>
+            <button className={sortName === "film ancien" ? "active" : ""} onClick={() => sort("film ancien")}>Film ancien</button>
+            <button className={sortName === "film recent" ? "active" : ""} onClick={() => sort("film recent")}>Film récent</button>
+          </div>
+        </div>
         <p>
           <button className="pagination-button" onClick={prev_page}>
             Page précédente
@@ -122,7 +143,7 @@ function Home() {
 
         </p>
 
-        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName} genres ={genres}> </MoviesTable>
+        <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName} genres={genres}> </MoviesTable>
 
         <p>
           <button className="pagination-button" onClick={prev_page}>
