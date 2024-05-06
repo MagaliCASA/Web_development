@@ -21,11 +21,13 @@ function MoviesTable(props) {
       if (props.search != "") {
         demande = "search/movie?api_key="+apiKey+"&query="+props.search;
       }
-      if (props.sort_type != "Pas de tri")
+      if (props.sort_type != "Pas de tri" || props.genres != "")
       {
-        if (props.sort_type == "film recent"){sort = "primary_release_date.desc";}
-        if (props.sort_type == "film ancien"){sort = "primary_release_date.asc";}
-        demande = "discover/movie?api_key="+apiKey+"&sort_by="+sort;
+        demande = "discover/movie?api_key="+apiKey;
+        if (props.sort_type == "film recent"){demande+= "&sort_by=primary_release_date.desc";}
+        if (props.sort_type == "film ancien"){demande+= "&sort_by=primary_release_date.asc";}
+        if (props.genres != ""){demande+= "&with_genres="+props.genres;}
+        
       } 
       
       //&page=${props.page}
