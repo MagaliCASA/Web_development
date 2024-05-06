@@ -59,7 +59,7 @@ router.post('/new', (req, res) => {
             message: `code d'erreur 23505 ?`,
           });
         } else {
-          res.status(500).json({ message: 'Erreur dans l\'ajout du film'});
+          res.status(500).json({ message: 'Erreur dans l\'ajout de la note'});
         }
       })
 });
