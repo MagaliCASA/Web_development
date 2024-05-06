@@ -22,7 +22,13 @@ const useConnectUser = () => {
 
     axios
       .post(`${import.meta.env.VITE_BACKDEND_URL}/users/login`, formValues)
-      .then(() => {
+      .then((response) => {
+        const token = response.data.token;
+        const name = response.data.name;
+        console.log("name : ", name);
+        localStorage.setItem("user", JSON.stringify({name, token})); // Stockage du token JWT dans le local storage
+
+        console.log(token);
         setLoginSuccess('User logged in successfully');
         setTimeout(() => {
           setLoginSuccess(null);
