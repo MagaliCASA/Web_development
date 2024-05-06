@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import malacy from './PetitPoisson.png'
 import poisson from './file.png'
-import poisson2 from './PoissonGauche.png'
+import poisson2 from './bluefish.png'
 import './Home.css';
 import Movie from '../../components/Movie/Movie.jsx'
 import MoviesTable from '../../components/MoviesTable/MoviesTable';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
 
 function Home() {
   const [movies, setMovies] = useState([]);
