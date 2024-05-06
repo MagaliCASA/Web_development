@@ -13,6 +13,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 function Home() {
   const [movies, setMovies] = useState([]);
   const [movieName, setMovieName] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const [minRating, setMinRating] = useState(0);
   const [page, setPage] = useState(1);
@@ -24,11 +25,7 @@ function Home() {
   }
   //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
   const [sortName, setSortName] = useState("Pas de tri");
-  const next_sort = (event) => {
-    if (sortName == "film ancien") { setSortName("Pas de tri"); setMovieName(""); }
-    if (sortName == "Pas de tri") { setSortName("film recent"); setMovieName("----"); }
-    if (sortName == "film recent") { setSortName("film ancien"); setMovieName("---- "); }
-  }
+
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const [genres, setGenres] = useState("");
@@ -92,7 +89,7 @@ function Home() {
         <h1>Recommendations de films</h1>
         <label htmlFor="textInput">Rechercher un film :
           <div className="search-container">
-            <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
+            <input type="text" id="film" name="film" size="10" value={movieName} onChange={handleChange} />
             <button className="search-button"><FontAwesomeIcon icon={faSearch} /></button>
           </div>
           <p>{movieName}</p>
@@ -107,10 +104,8 @@ function Home() {
             onChange={e => setMinRating(parseFloat(e.target.value))}
             style={{ width: '80%', marginBottom: '20px' }}
           /> <br />
-          <button onClick={next_sort}>
-            {sortName}</button>
         </label>
-        <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
+        {/* <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
         <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
           <option value="">------</option>
           <option value="16">Animation</option>
@@ -121,7 +116,20 @@ function Home() {
           <option value="878">Science-Fiction</option>
           <option value="53">Thriller</option>
           <option value="10751">Famille</option>
+          <option value="14">Fantaisie</option> */}
+        {/* Tri par genre*/}
+        <label htmlFor="dropdown">Tri par genre :</label>
+        <select id="genre" value={selectedGenre} onChange={handleChange}>
+          <option value="">------</option>
+          <option value="28">Action</option>
+          <option value="16">Animation</option>
+          <option value="12">Aventure</option>
+          <option value="35">Comédie</option>
+          <option value="10751">Famille</option>
           <option value="14">Fantaisie</option>
+          <option value="27">Horreur</option>
+          <option value="878">Science-Fiction</option>
+          <option value="53">Thriller</option>
 
         </select>
         <div className="sort-container">
@@ -167,7 +175,7 @@ function Home() {
           rel="noopener noreferrer"
         ></a>
       </header>
-    </div>
+    </div >
   );
 }
 

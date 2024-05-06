@@ -80,6 +80,88 @@
   justify-content: space-evenly;
 }
 
+.App {
+  text-align: center;
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-image: linear-gradient(45deg, #46b8d1, #76b3d4, #4e54c8);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  color: white;
+  padding: 5px 10px;
+  /* Réduit la taille des boutons */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  /* Réduit la taille de la police */
+  margin: 15px 15px;
+  /* Augmente l'espace entre les boutons */
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.pagination-button:active {
+  background-color: #003d80;
+  border-color: #003d80;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  color: white;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.movies-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
 .sort-buttons {
   display: flex;
 }
