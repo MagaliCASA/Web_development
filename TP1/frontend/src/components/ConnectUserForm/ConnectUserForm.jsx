@@ -26,7 +26,7 @@ const useConnectUser = () => {
         const token = response.data.token;
         const name = response.data.name;
         console.log("name : ", name);
-        localStorage.setItem("user", JSON.stringify({name, token})); // Stockage du token JWT dans le local storage
+        localStorage.setItem("user", JSON.stringify({ name, token })); // Stockage du token JWT dans le local storage
 
         console.log(token);
         setLoginSuccess('User logged in successfully');
@@ -57,7 +57,7 @@ function ConnectUserForm() {
         <input
           className="connect-user-input"
           type="email"
-          placeholder="Email"
+          placeholder="Mail"
           value={formValues.email}
           onChange={(event) =>
             setFormValues({ ...formValues, email: event.target.value })
@@ -66,14 +66,14 @@ function ConnectUserForm() {
         <input
           className="connect-user-input"
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           value={formValues.password}
           onChange={(event) =>
             setFormValues({ ...formValues, password: event.target.value })
           }
         />
         <button className="connect-user-button" type="submit">
-          Connect
+          Se connecter
         </button>
       </form>
       {loginSuccess !== null && (

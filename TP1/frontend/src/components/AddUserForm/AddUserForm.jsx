@@ -57,7 +57,7 @@ function AddUserForm() {
         <input
           className="add-user-input"
           type="email"
-          placeholder="Email"
+          placeholder="Mail"
           value={formValues.email}
           onChange={(event) =>
             setFormValues({ ...formValues, email: event.target.value })
@@ -65,7 +65,7 @@ function AddUserForm() {
         />
         <input
           className="add-user-input"
-          placeholder="Name"
+          placeholder="Nom"
           value={formValues.name}
           onChange={(event) =>
             setFormValues({ ...formValues, name: event.target.value })
@@ -73,14 +73,14 @@ function AddUserForm() {
         />
         <input
           className="add-user-input"
-          placeholder="Password"
+          placeholder="Mot de passe"
           value={formValues.password}
           onChange={(event) =>
             setFormValues({ ...formValues, password: event.target.value })
           }
         />
         <button className="add-user-button" type="submit">
-          Add user
+          Ajouter utilisateur
         </button>
       </form>
       {userCreationSuccess !== null && (

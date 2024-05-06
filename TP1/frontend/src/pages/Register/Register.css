@@ -1,19 +1,10 @@
 /* Users.css */
 
 /* Sélecteurs pour tous les champs de formulaire */
-
-.form-section input[type="password"],
-.connected-user-section input[type="password"],
 .form-section input[type="email"],
-.connected-user-section input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: 3px solid #d30000;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
+.connected-user-section input[type="email"],
+.form-section input[type="text"],
+.connected-user-section input[type="text"],
 .form-section input[type="password"],
 .connected-user-section input[type="password"] {
   width: 100%;
