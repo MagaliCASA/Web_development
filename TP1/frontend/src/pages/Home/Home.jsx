@@ -22,10 +22,10 @@ function Home() {
   }
   //const [sort, setSort] = useState(0);//0 : pas de tri 1: film plus recent 2: film plus ancien
   const [sortName, setSortName] = useState("Pas de tri");
-  const next_sort = (event) => {    
-    if (sortName == "film ancien") { setSortName("Pas de tri");}
-    if (sortName == "Pas de tri") { setSortName("film recent");}
-    if (sortName == "film recent") { setSortName("film ancien");}
+  const next_sort = (event) => {
+    if (sortName == "film ancien") { setSortName("Pas de tri");setMovieName(""); }
+    if (sortName == "Pas de tri") { setSortName("film recent");setMovieName("----"); }
+    if (sortName == "film recent") { setSortName("film ancien");setMovieName("---- "); }
 
 
   }
@@ -66,32 +66,42 @@ function Home() {
         <h1>Recommendations de films</h1>
         <label htmlFor="textInput">Rechercher un film :
           <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
-          <br/> 
-          Note minimale : {minRating}<br/> 
-          <input 
-                type="range" 
-                min="0" 
-                max="10" 
-                step="0.1" 
-                value={minRating} 
-                onChange={e => setMinRating(parseFloat(e.target.value))} 
-                style={{ width: '80%', marginBottom: '20px' }} 
-            /> <br/> 
-            <button onClick={next_sort}>
-            {sortName}</button>     
+          <br />
+          Note minimale : {minRating}<br />
+          <input
+            type="range"
+            min="0"
+            max="10"
+            step="0.1"
+            value={minRating}
+            onChange={e => setMinRating(parseFloat(e.target.value))}
+            style={{ width: '80%', marginBottom: '20px' }}
+          /> <br />
+          <button onClick={next_sort}>
+            {sortName}</button>
         </label>
         <p>
-          <button onClick={prev_page}>
-            prev</button> {page} <button onClick={next_page}>
-            next</button>
+          <button className="pagination-button" onClick={prev_page}>
+            Page précédente
+          </button>
+          <span>{page}</span>
+          <button className="pagination-button" onClick={next_page}>
+            Page suivante
+          </button>
+
         </p>
 
         <MoviesTable page={page} search={movieName} note_min={minRating} sort_type={sortName}> </MoviesTable>
 
         <p>
-          <button onClick={prev_page}>
-            prev</button> {page} <button onClick={next_page}>
-            next</button>
+          <button className="pagination-button" onClick={prev_page}>
+            Page précédente
+          </button>
+          <span>{page}</span>
+          <button className="pagination-button" onClick={next_page}>
+            Page suivante
+          </button>
+
         </p>
         <ul class="movies-container">
           {
@@ -103,7 +113,7 @@ function Home() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-          ></a>
+        ></a>
       </header>
     </div>
   );
