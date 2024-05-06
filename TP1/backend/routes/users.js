@@ -3,6 +3,8 @@ import { appDataSource } from '../datasource.js';
 import User from '../entities/user.js';
 import jwt from 'jsonwebtoken';
 
+const jwtSecretKey = 'abcd';
+
 const router = express.Router();
 
 router.post('/login', function (req, res) {
@@ -23,7 +25,7 @@ router.post('/login', function (req, res) {
       }
 
       // Authentification réussie
-      const token = jwt.sign(email, "abcd");
+      const token = jwt.sign(email, jwtSecretKey);
       console.log(token);
       res.status(200).json({ message: 'Login successful', token, name: user.name });
 

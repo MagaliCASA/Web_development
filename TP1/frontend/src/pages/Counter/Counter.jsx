@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import './Counter.css';
+import VerifyToken from '../../components/ConnectUserForm/VerifyToken';
 
 function Counter() {
   const [counter, setCounter] = useState(0);
+  const {loggedIn, name} = VerifyToken();
+  console.log(name);
 
   return (
     <div className="Counter-container">

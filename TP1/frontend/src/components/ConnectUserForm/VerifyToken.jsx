@@ -12,7 +12,7 @@ function useTokenVerification() {
            return;
        }
 
-       fetch("http://localhost:8080/api/auth/verify", {
+       fetch("http://localhost:8080/api/users/verify", {
            method: "POST",
            headers: {
                'jwt-token': user.token

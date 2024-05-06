@@ -9,6 +9,7 @@ function Users() {
   const { loggedIn, name } = VerifyToken();
   const [users, setUsers] = useState([]);
 
+
   useEffect(() => {
     console.log("Le nom a changé :", name);
   }, [name]); // Ajoutez 'name' dans le tableau de dépendances
