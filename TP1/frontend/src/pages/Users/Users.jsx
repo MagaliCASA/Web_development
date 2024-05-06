@@ -8,7 +8,6 @@ import VerifyToken from '../../components/ConnectUserForm/VerifyToken';
 function Users() {
   const { loggedIn, name } = VerifyToken();
   const [users, setUsers] = useState([]);
-  console.log("Name :", name);
 
   useEffect(() => {
     console.log("Le nom a changé :", name);
@@ -20,12 +19,22 @@ function Users() {
 
   return (
     <div className="Users-container">
-      <h1>Créer un compte</h1>
-      <AddUserForm />
-      <h1>Se connecter</h1>
-      <ConnectUserForm />
-      <h1>Nom de l'utilisateur connecté :</h1>
-      <p>{name}</p>
+      <div className="form-section">
+        <h1>Créer un compte</h1>
+        <AddUserForm />
+      </div>
+      <div className="login-link">
+        <p>Déjà un compte ? <a href="#connexion">Connectez-vous !</a></p>
+      </div>
+      <div className="form-section">
+        <h1>Se connecter</h1>
+        <ConnectUserForm />
+      </div>
+      <div className="connected-user-section">
+        <h1>Nom de l'utilisateur connecté :</h1>
+        <p>{name}</p>
+      </div>
+
     </div>
   );
 }
