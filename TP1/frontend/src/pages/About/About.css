@@ -18,3 +18,7 @@
   font-size: 1.2em;
   line-height: 1.6;
 }
+
+body {
+  margin: 0; /* Réinitialiser les marges par défaut */
+}

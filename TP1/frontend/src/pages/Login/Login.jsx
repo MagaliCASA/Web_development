@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
+import backgroundImage from './ocean-transformed.jpeg';
 import AddUserForm from '../../components/AddUserForm/AddUserForm';
 import ConnectUserForm from '../../components/ConnectUserForm/ConnectUserForm';
 import UsersTable from '../../components/UsersTable/UsersTable';
@@ -18,15 +19,24 @@ function Users() {
   };
 
   return (
-    <div className="Users-container">
-      <div className="form-section">
-        <h1>Se connecter</h1>
-        <ConnectUserForm />
-      </div>
-      <div className="connected-user-section">
-        <p>Pas de compte ? <a href="../Register" className="login-link-text">Inscrivez-vous !</a></p>
-      </div>
+    <div style={{
+      backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover', // Taille de l'image automatique
+      // backgroundRepeat: 'repeat', // Répéter l'image
+      backgroundPosition: 'center',
+      minHeight: '100vh',
+      color: 'black'
+    }}>
+      <div className="Users-container">
+        <div className="form-section">
+          <h1>Se connecter</h1>
+          <ConnectUserForm />
+        </div>
+        <div className="connected-user-section"> 
+          <p style={{color: 'black'}}>Pas de compte ? <a href="../Register" className="login-link-text">Inscrivez-vous !</a></p>
+        </div>
 
+      </div>
     </div>
   );
 }
