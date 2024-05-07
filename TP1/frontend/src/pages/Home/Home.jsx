@@ -87,10 +87,9 @@ function Home() {
         <h1>Recommendations de films</h1>
         <label htmlFor="textInput">Rechercher un film :
           <div className="search-container">
-            <input type="text" id="film" name="film" size="10" value={movieName} onChange={handleChange} />
+            <input type="text" id="film" name="film" size="10" value={movieName} onChange={(event) => setMovieName(event.target.value)} />
             <button className="search-button"><FontAwesomeIcon icon={faSearch} /></button>
           </div>
-          <p>{movieName}</p>
           <br />
           Note minimale : {minRating}<br />
           <input
@@ -103,21 +102,8 @@ function Home() {
             style={{ width: '80%', marginBottom: '20px' }}
           /> <br />
         </label>
-        {/* <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
+        <label htmlFor="dropdown">Tri par genre (maintenir CTRL pour plusieurs choix) :</label>
         <select id="multiSelect" multiple value={selectedOptions} onChange={handleChange}>
-          <option value="">------</option>
-          <option value="16">Animation</option>
-          <option value="12">Aventure</option>
-          <option value="27">Horreur</option>
-          <option value="35">Comédie</option>
-          <option value="28">Action</option>
-          <option value="878">Science-Fiction</option>
-          <option value="53">Thriller</option>
-          <option value="10751">Famille</option>
-          <option value="14">Fantaisie</option> */}
-        {/* Tri par genre*/}
-        <label htmlFor="dropdown">Tri par genre :</label>
-        <select id="genre" value={selectedGenre} onChange={handleChange}>
           <option value="">------</option>
           <option value="28">Action</option>
           <option value="16">Animation</option>
@@ -128,6 +114,19 @@ function Home() {
           <option value="27">Horreur</option>
           <option value="878">Science-Fiction</option>
           <option value="53">Thriller</option>
+          {/* Tri par genre
+        <label htmlFor="dropdown">Tri par genre :</label>
+        <select id="genre" multiple value={selectedOptions} onChange={handleChange}>
+          <option value="">------</option>
+          <option value="28">Action</option>
+          <option value="16">Animation</option>
+          <option value="12">Aventure</option>
+          <option value="35">Comédie</option>
+          <option value="10751">Famille</option>
+          <option value="14">Fantaisie</option>
+          <option value="27">Horreur</option>
+          <option value="878">Science-Fiction</option>
+          <option value="53">Thriller</option> */}
 
         </select>
         <div className="sort-container">
