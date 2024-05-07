@@ -8,7 +8,7 @@ async function fetchMovieNotesAndUpdateStats(movieId, oldAverage, oldTotalVotes)
     const response = await axios.get(`/api/notes/${movieId}/notes`);
     const { notes, newAverage, totalNotes } = response.data;
 
-    return {newAverage , totalNotes};
+    return { newAverage, totalNotes };
 
     // Vous pouvez maintenant mettre à jour votre interface utilisateur avec les nouvelles statistiques
   } catch (error) {
@@ -24,7 +24,7 @@ function MovieDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(null); // Stocke l'URL de l'image d'arrière-plan
-  const [trailerUrl, setTrailerUrl] = useState(null); // Stocke l'URL de la bande annonce
+  const [trailerUrl, setTrailerUrl] = useState('https://www.youtube.com/watch?v=Way9Dexny3w'); // Stocke l'URL de la bande annonce
   const [rating, setRating] = useState(0); // Stocke la note donnée par l'utilisateur (par défaut, 0 étoiles)
   const [hoverRating, setHoverRating] = useState(0); // Stocke la note en survol de la souris
   const [comment, setComment] = useState(""); // Stocke le commentaire de l'utilisateur
@@ -50,7 +50,7 @@ function MovieDetail() {
               sommenote += note.note;
               nbnotessaved++;
             })
-            const avgtemp = (response1.data.vote_average * response1.data.vote_count + 2*sommenote)/(response1.data.vote_count + nbnotessaved);
+            const avgtemp = (response1.data.vote_average * response1.data.vote_count + 2 * sommenote) / (response1.data.vote_count + nbnotessaved);
             const notestemp = response1.data.vote_count + nbnotessaved;
             setNoteAvg(avgtemp.toFixed(2));
             setNbNotes(notestemp);
@@ -89,7 +89,7 @@ function MovieDetail() {
         console.error('Erreur lors de la récupération des détails du film:', error);
         setError(error); // Met à jour l'état d'erreur
         setLoading(false); // Met à jour l'état de chargement
-       });
+      });
   }, [movieId]);
 
   useEffect(() => {
@@ -148,10 +148,10 @@ function MovieDetail() {
   // Affichez les détails du film une fois qu'ils sont disponibles
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '800px', padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '1200px', padding: '20px', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '10px' }}>
         <h1 style={{ fontSize: '2em', textAlign: 'center', color: 'black' }}>{movie && movie.title}</h1>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <img src={`https://image.tmdb.org/t/p/original${movie && movie.poster_path}`} alt={movie && movie.title} style={{ maxWidth: '50%', maxHeight: 'auto', marginRight: '20px', cursor: 'pointer' }} onClick={() => openTrailer()} />
+          <img src={`https://image.tmdb.org/t/p/original${movie && movie.poster_path}`} alt={movie && movie.title} style={{ maxWidth: '60%', width: 'auto', height: 'auto', marginRight: '20px', cursor: 'pointer' }} onClick={() => openTrailer()} />
           {movie && movie.adult && <img src="https://example.com/adult-image.png" alt="Interdit aux moins de 18 ans" />}
           <div>
             <p style={{ color: 'black' }}><strong><u>Date de sortie :</u></strong> {movie && movie.release_date}</p>
@@ -194,9 +194,9 @@ function MovieDetail() {
             {/* Affichage des commentaires */}
             <div style={{ marginTop: '20px' }}>
               <h2 style={{ color: 'black' }}>Derniers commentaires :</h2>
-              <ul style={{ listStyleType: 'none', padding: 0}}>
+              <ul style={{ listStyleType: 'none', padding: 0 }}>
                 {comments.map((comment, index) => (
-                  <li key={index} style={{ color: 'black', border: '1px solid black'  }}>{comment}</li>
+                  <li key={index} style={{ color: 'black', border: '1px solid black' }}>{comment}</li>
                 ))}
               </ul>
             </div>
